@@ -75,10 +75,59 @@ namespace DataConnectivity_Assignment2
 
             Console.WriteLine("Success - GetProgram");
         }
+        static void GetPrograms()
+        {
+            Console.WriteLine("GetPrograms");
+
+            SqlConnection MyDataSource; // declaration
+            MyDataSource = new(); // instantiation
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Integrated Security=True;Database=ptrninkov1;server=(localDB)\MSSQLLocalDB;"; //Windows Authentication
+            MyDataSource.Open();
+
+            SqlCommand SQLCommand = new()
+            {
+                Connection = MyDataSource,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "GetPrograms"
+            };
+
+            SqlDataReader DataReader;
+            DataReader = SQLCommand.ExecuteReader();
+
+            if (DataReader.HasRows)
+            {
+                Console.WriteLine("--------");
+                Console.WriteLine("Columns:");
+                Console.WriteLine("--------");
+
+                for (int index = 0; index < DataReader.FieldCount; index++)
+                {
+                    Console.WriteLine(DataReader.GetName(index));
+                }
+                Console.WriteLine("--------");
+                Console.WriteLine("Values");
+                Console.WriteLine("--------");
+
+                while (DataReader.Read())
+                {
+                    for (int index = 0; index < DataReader.FieldCount; index++)
+                    {
+                        Console.WriteLine(DataReader[index].ToString());
+                    }
+                    Console.WriteLine("-");
+                }
+            }
+
+            DataReader.Close();
+            MyDataSource.Close();
+
+            Console.WriteLine("Success - GetPrograms");
+        }
         static void Main(string[] args)
         {
             //AddProgram();
-            GetProgram();
+            //GetProgram();
+            //GetPrograms();
         }
     }
 }
