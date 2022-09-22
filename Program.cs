@@ -8,7 +8,7 @@ namespace DataConnectivity_Assignment2
     {
         static void AddProgram()
         {
-            Console.WriteLine("AddProgramExecuteNonQueryExample");
+            Console.WriteLine("AddProgram");
 
             SqlConnection MyDataSource; // declaration
             MyDataSource = new(); // instantiation
@@ -16,40 +16,69 @@ namespace DataConnectivity_Assignment2
                                            //"Persist Security Info=False;Database=ptrninkov1;User ID=ptrninkov1;Password=xxxx;server=dev1.baist.ca"; //SQL SERVER authentication
             MyDataSource.Open();
 
-            SqlCommand ExampleCommand = new(); // Declaration and instantiation
-            ExampleCommand.Connection = MyDataSource;
-            ExampleCommand.CommandType = CommandType.StoredProcedure;
-            ExampleCommand.CommandText = "AddProgram";
+            SqlCommand SQLCommand = new(); // Declaration and instantiation
+            SQLCommand.Connection = MyDataSource;
+            SQLCommand.CommandType = CommandType.StoredProcedure;
+            SQLCommand.CommandText = "AddProgram";
 
-            SqlParameter ExampleCommandParameter;
-            ExampleCommandParameter = new()//object initialization syntax
+            SqlParameter sqlParameter;
+            sqlParameter = new()//object initialization syntax
             {
                 ParameterName = "@ProgramCode",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
                 Value = "EXAMPLE3"
             };
-            ExampleCommand.Parameters.Add(ExampleCommandParameter);
+            SQLCommand.Parameters.Add(sqlParameter);
 
-            ExampleCommandParameter = new()
+            sqlParameter = new()
             {
                 ParameterName = "@Description",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
                 Value = "Example Description3"
             };
-            ExampleCommand.Parameters.Add(ExampleCommandParameter);
+            SQLCommand.Parameters.Add(sqlParameter);
 
-            ExampleCommand.ExecuteNonQuery();
+            SQLCommand.ExecuteNonQuery();
 
             MyDataSource.Close();
 
-            Console.WriteLine("Success - ExecuteNonQuery");
+            Console.WriteLine("Success - AddProgram");
+        }
+        static void GetProgram()
+        {
+            Console.WriteLine("GetProgram");
+
+            SqlConnection MyDataSource = new();
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Integrated Security=True;Database=ptrninkov1;server=(localDB)\MSSQLLocalDB;";
+
+            MyDataSource.Open();
+
+            SqlCommand SQLCommand = new();
+            SQLCommand.Connection = MyDataSource;
+            SQLCommand.CommandType = CommandType.StoredProcedure;
+            SQLCommand.CommandText = "GetProgram";
+
+            SqlParameter sqlParameter = new()
+            {
+                ParameterName = "@ProgramCode",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "DMIT"
+            };
+
+            SQLCommand.Parameters.Add(sqlParameter);
+            Console.WriteLine(SQLCommand.ExecuteScalar().ToString());
+
+            MyDataSource.Close();
+
+            Console.WriteLine("Success - GetProgram");
         }
         static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World!");
-            AddProgram();
+            //AddProgram();
+            GetProgram();
         }
     }
 }
