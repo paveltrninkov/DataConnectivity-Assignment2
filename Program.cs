@@ -27,7 +27,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@ProgramCode",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "EXAMPLE3"
+                Value = "EXAMPLE4"
             };
             SQLCommand.Parameters.Add(SQLParameter);
 
@@ -36,7 +36,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@Description",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "Example Description3"
+                Value = "Example Description4"
             };
             SQLCommand.Parameters.Add(SQLParameter);
 
@@ -65,7 +65,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@ProgramCode",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "DMIT"
+                Value = "EXAMPLE4"
             };
 
             SQLCommand.Parameters.Add(SQLParameter);
@@ -227,7 +227,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@StudentID",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "123456"
+                Value = "57122"
             };
             SQLCommand.Parameters.Add(SQLParameter);
 
@@ -299,8 +299,7 @@ namespace DataConnectivity_Assignment2
             //AddStudent();
             //UpdateStudent();
             //DeleteStudent();
-            GetStudentsByProgram();
-
+            //GetStudentsByProgram();
         }
     }
 }
