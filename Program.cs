@@ -27,7 +27,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@ProgramCode",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "EXAMPLE4"
+                Value = "Demo"
             };
             SQLCommand.Parameters.Add(SQLParameter);
 
@@ -36,7 +36,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@Description",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "Example Description4"
+                Value = "Demo Description"
             };
             SQLCommand.Parameters.Add(SQLParameter);
 
@@ -65,7 +65,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@ProgramCode",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "EXAMPLE4"
+                Value = "Demo"
             };
 
             SQLCommand.Parameters.Add(SQLParameter);
@@ -132,7 +132,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@ProgramCode",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "DMIT"
+                Value = "BAIST"
             };
             SQLCommand.Parameters.Add(SQLParameter);
 
@@ -189,7 +189,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@Email",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "had@sexual.relation"
+                Value = "something"
             };
             SQLCommand.Parameters.Add(SQLParameter);
 
@@ -198,7 +198,7 @@ namespace DataConnectivity_Assignment2
                 ParameterName = "@ProgramCode",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
-                Value = "EXAMPLE"
+                Value = "Demo"
             };
             SQLCommand.Parameters.Add(SQLParameter);
 
@@ -235,6 +235,61 @@ namespace DataConnectivity_Assignment2
 
             MyDataSource.Close();
             Console.WriteLine("Success - DeleteStudent");
+        }
+
+        static void GetStudent()
+        {
+            Console.WriteLine("GetStudent");
+            SqlConnection MyDataSource = new();
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Integrated Security = True;Database=ptrninkov1;server=(LocalDB)\MSSQLLocalDB;";
+            MyDataSource.Open();
+
+            SqlCommand SQLCommand = new()
+            {
+                Connection = MyDataSource,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "GetStudent"
+            };
+
+            SqlParameter SQLParameter = new()
+            {
+                ParameterName = "@StudentID",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "57122"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SqlDataReader DataReader = SQLCommand.ExecuteReader();
+
+            if (DataReader.HasRows)
+            {
+                Console.WriteLine("---------------");
+                Console.WriteLine("Columns");
+                Console.WriteLine("---------------");
+
+                for (int i = 0; i < DataReader.FieldCount; i++)
+                {
+                    Console.WriteLine(DataReader.GetName(i));
+                }
+
+                Console.WriteLine("---------------");
+                Console.WriteLine("Rows");
+                Console.WriteLine("---------------");
+
+                while (DataReader.Read())
+                {
+                    for (int i = 0; i < DataReader.FieldCount; i++)
+                    {
+                        Console.WriteLine(DataReader[i].ToString());
+                    }
+                    Console.WriteLine("---");
+                }
+            }
+
+            DataReader.Close();
+            MyDataSource.Close();
+            Console.WriteLine("Success - GetStudent");
         }
 
         static void GetStudentsByProgram()
@@ -292,14 +347,190 @@ namespace DataConnectivity_Assignment2
             MyDataSource.Close();
             Console.WriteLine("Success - GetStudentsByProgram");
         }
+
+        /*
+         * ------------------------------------BAIST SERVER------------------------------------
+         */
+
+        static void GetCustomersByCountry()
+        {
+            Console.WriteLine("GetCustomersByCountry");
+
+            SqlConnection MyDataSource = new();
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Database=Northwind;User ID=ptrninkov1;Password=rageking1A;server=dev1.baist.ca";
+            MyDataSource.Open();
+
+            SqlCommand SQLCommand = new()
+            {
+                Connection = MyDataSource,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "ptrninkov1.GetCustomersByCountry"
+            };
+
+            SqlParameter SQLParameter = new()
+            {
+                ParameterName = "@Country",
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Input,
+                Value = "Germany"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SqlDataReader DataReader = SQLCommand.ExecuteReader();
+
+            if (DataReader.HasRows)
+            {
+                Console.WriteLine("---------------");
+                Console.WriteLine("Columns");
+                Console.WriteLine("---------------");
+
+                for (int i = 0; i < DataReader.FieldCount; i++)
+                {
+                    Console.WriteLine(DataReader.GetName(i));
+                }
+
+                Console.WriteLine("---------------");
+                Console.WriteLine("Rows");
+                Console.WriteLine("---------------");
+
+                while (DataReader.Read())
+                {
+                    for (int i = 0; i < DataReader.FieldCount; i++)
+                    {
+                        Console.WriteLine(DataReader[i].ToString());
+                    }
+                    Console.WriteLine("---");
+                }
+            }
+
+            DataReader.Close();
+            MyDataSource.Close();
+            Console.WriteLine("Success - GetCustomersByCountry");
+        }
+
+        static void GetCategory()
+        {
+            Console.WriteLine("GetCategory");
+            SqlConnection MyDataSource = new();
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Database=Northwind;User ID=ptrninkov1;Password=rageking1A;server=dev1.baist.ca";
+
+            MyDataSource.Open();
+
+            SqlCommand SQLCommand = new()
+            {
+                Connection = MyDataSource,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "ptrninkov1.GetCategory"
+            };
+
+            SqlParameter SQLParameter = new()
+            {
+                ParameterName = "CategoryID",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input,
+                Value = 1
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SqlDataReader DataReader = SQLCommand.ExecuteReader();
+
+            if (DataReader.HasRows)
+            {
+                Console.WriteLine("---------------");
+                Console.WriteLine("Columns");
+                Console.WriteLine("---------------");
+
+                for (int i = 0; i < DataReader.FieldCount; i++)
+                {
+                    Console.WriteLine(DataReader.GetName(i));
+                }
+
+                Console.WriteLine("---------------");
+                Console.WriteLine("Rows");
+                Console.WriteLine("---------------");
+
+                while (DataReader.Read())
+                {
+                    for (int i = 0; i < DataReader.FieldCount; i++)
+                    {
+                        Console.WriteLine(DataReader[i].ToString());
+                    }
+                    Console.WriteLine("---");
+                }
+            }
+
+            MyDataSource.Close();
+            Console.WriteLine("Success - GetCategory");
+        }
+
+        static void GetProductsByCategory()
+        {
+            Console.WriteLine("GetProductsByCategory");
+            SqlConnection MyDataSource = new();
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Database=Northwind;User ID=ptrninkov1;Password=rageking1A;server=dev1.baist.ca";
+            MyDataSource.Open();
+
+            SqlCommand SQLCommand = new()
+            {
+                Connection = MyDataSource,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "ptrninkov1.GetProductsByCategory"
+            };
+
+            SqlParameter SQLParameter = new()
+            {
+                ParameterName = "@CategoryID",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input,
+                Value = 1
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SqlDataReader DataReader = SQLCommand.ExecuteReader();
+
+            if (DataReader.HasRows)
+            {
+                Console.WriteLine("---------------");
+                Console.WriteLine("Columns");
+                Console.WriteLine("---------------");
+
+                for (int i = 0; i < DataReader.FieldCount; i++)
+                {
+                    Console.WriteLine(DataReader.GetName(i));
+                }
+
+                Console.WriteLine("---------------");
+                Console.WriteLine("Rows");
+                Console.WriteLine("---------------");
+
+                while (DataReader.Read())
+                {
+                    for (int i = 0; i < DataReader.FieldCount; i++)
+                    {
+                        Console.WriteLine(DataReader[i].ToString());
+                    }
+                    Console.WriteLine("---");
+                }
+            }
+
+            DataReader.Close();
+            MyDataSource.Close();
+            Console.WriteLine("Success - GetProductsByCategory");
+        }
         static void Main(string[] args)
         {
-            //AddProgram();
-            //GetProgram();
-            //AddStudent();
-            //UpdateStudent();
+            //AddProgram(); // Demonstration | Demonstration Description
+            //GetProgram(); // Demonstration
+            //AddStudent(); // Bill Clinton ID=57122 INTO BAIST
+            //UpdateStudent(); // Cill Blinton INTO Demonstration
             //DeleteStudent();
-            //GetStudentsByProgram();
+            //GetStudent(); // 123654 TEST TEST TESTING
+            //GetStudentsByProgram(); // BAIST Students
+
+            //---------------------------
+            //GetCustomersByCountry();
+            //GetCategory();
+            //GetProductsByCategory();
         }
     }
 }
