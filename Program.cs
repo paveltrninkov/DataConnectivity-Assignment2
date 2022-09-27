@@ -21,24 +21,24 @@ namespace DataConnectivity_Assignment2
             SQLCommand.CommandType = CommandType.StoredProcedure;
             SQLCommand.CommandText = "AddProgram";
 
-            SqlParameter sqlParameter;
-            sqlParameter = new()//object initialization syntax
+            SqlParameter SQLParameter;
+            SQLParameter = new()//object initialization syntax
             {
                 ParameterName = "@ProgramCode",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
                 Value = "EXAMPLE3"
             };
-            SQLCommand.Parameters.Add(sqlParameter);
+            SQLCommand.Parameters.Add(SQLParameter);
 
-            sqlParameter = new()
+            SQLParameter = new()
             {
                 ParameterName = "@Description",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
                 Value = "Example Description3"
             };
-            SQLCommand.Parameters.Add(sqlParameter);
+            SQLCommand.Parameters.Add(SQLParameter);
 
             SQLCommand.ExecuteNonQuery();
 
@@ -60,7 +60,7 @@ namespace DataConnectivity_Assignment2
             SQLCommand.CommandType = CommandType.StoredProcedure;
             SQLCommand.CommandText = "GetProgram";
 
-            SqlParameter sqlParameter = new()
+            SqlParameter SQLParameter = new()
             {
                 ParameterName = "@ProgramCode",
                 SqlDbType = SqlDbType.VarChar,
@@ -68,66 +68,239 @@ namespace DataConnectivity_Assignment2
                 Value = "DMIT"
             };
 
-            SQLCommand.Parameters.Add(sqlParameter);
+            SQLCommand.Parameters.Add(SQLParameter);
             Console.WriteLine(SQLCommand.ExecuteScalar().ToString());
 
             MyDataSource.Close();
 
             Console.WriteLine("Success - GetProgram");
         }
-        static void GetPrograms()
+    
+        static void AddStudent()
         {
-            Console.WriteLine("GetPrograms");
+            Console.WriteLine("AddStudent");
 
-            SqlConnection MyDataSource; // declaration
-            MyDataSource = new(); // instantiation
-            MyDataSource.ConnectionString = @"Persist Security Info=False;Integrated Security=True;Database=ptrninkov1;server=(localDB)\MSSQLLocalDB;"; //Windows Authentication
+            SqlConnection MyDataSource = new();
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Integrated Security=True;Database=ptrninkov1;server=(localDB)\MSSQLLocalDB;";
             MyDataSource.Open();
 
             SqlCommand SQLCommand = new()
             {
                 Connection = MyDataSource,
                 CommandType = CommandType.StoredProcedure,
-                CommandText = "GetPrograms"
+                CommandText = "AddStudent"
             };
 
-            SqlDataReader DataReader;
-            DataReader = SQLCommand.ExecuteReader();
+            SqlParameter SQLParameter = new()
+            {
+                ParameterName = "@StudentID",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "57122"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLParameter = new()
+            {
+                ParameterName = "@FirstName",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "Bill"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLParameter = new()
+            {
+                ParameterName = "@LastName",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "Clinton"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLParameter = new()
+            {
+                ParameterName = "@Email",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "none@sexual.relation"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLParameter = new()
+            {
+                ParameterName = "@ProgramCode",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "DMIT"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLCommand.ExecuteNonQuery();
+            MyDataSource.Close();
+
+            Console.WriteLine("Success - AddStudent");
+        }
+
+        static void UpdateStudent()
+        {
+            Console.WriteLine("UpdateStudent");
+
+            SqlConnection MyDataSource = new();
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Integrated Security=True;Database=ptrninkov1;server=(LocalDB)\MSSQLLocalDB;";
+            MyDataSource.Open();
+
+            SqlCommand SQLCommand = new()
+            {
+                Connection = MyDataSource,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "UpdateStudent"
+            };
+
+            SqlParameter SQLParameter = new()
+            {
+                ParameterName = "@StudentID",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "57122"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLParameter = new()
+            {
+                ParameterName = "@FirstName",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "Cill"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLParameter = new()
+            {
+                ParameterName = "@LastName",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "Blinton"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLParameter = new()
+            {
+                ParameterName = "@Email",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "had@sexual.relation"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLParameter = new()
+            {
+                ParameterName = "@ProgramCode",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "EXAMPLE"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLCommand.ExecuteNonQuery();
+
+            MyDataSource.Close();
+            Console.WriteLine("Success - UpdateStudent");
+        }
+
+        static void DeleteStudent()
+        {
+            Console.WriteLine("DeleteStudent");
+            SqlConnection MyDataSource = new();
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Integrated Security=True;Database=ptrninkov1;server=(LocalDB)\MSSQLLocalDB;";
+            MyDataSource.Open();
+
+            SqlCommand SQLCommand = new()
+            {
+                Connection = MyDataSource,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "DeleteStudent"
+            };
+
+            SqlParameter SQLParameter = new()
+            {
+                ParameterName = "@StudentID",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "123456"
+            };
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SQLCommand.ExecuteNonQuery();
+
+            MyDataSource.Close();
+            Console.WriteLine("Success - DeleteStudent");
+        }
+
+        static void GetStudentsByProgram()
+        {
+            Console.WriteLine("GetStudentsByProgram");
+            SqlConnection MyDataSource = new();
+            MyDataSource.ConnectionString = @"Persist Security Info=False;Integrated Security=True;Database=ptrninkov1;server=(LocalDB)\MSSQLLocalDB;";
+
+            MyDataSource.Open();
+
+            SqlCommand SQLCommand = new()
+            {
+                Connection = MyDataSource,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "GetStudentsByProgram"
+            };
+
+            SqlParameter SQLParameter = new()
+            {
+                ParameterName = "@ProgramCode",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                Value = "BAIST"
+            };
+
+            SQLCommand.Parameters.Add(SQLParameter);
+
+            SqlDataReader DataReader = SQLCommand.ExecuteReader();
 
             if (DataReader.HasRows)
             {
-                Console.WriteLine("--------");
-                Console.WriteLine("Columns:");
-                Console.WriteLine("--------");
+                Console.WriteLine("---------------");
+                Console.WriteLine("Columns");
+                Console.WriteLine("---------------");
 
-                for (int index = 0; index < DataReader.FieldCount; index++)
+                for (int i = 0; i < DataReader.FieldCount; i++)
                 {
-                    Console.WriteLine(DataReader.GetName(index));
+                    Console.WriteLine(DataReader.GetName(i));
                 }
-                Console.WriteLine("--------");
-                Console.WriteLine("Values");
-                Console.WriteLine("--------");
+
+                Console.WriteLine("---------------");
+                Console.WriteLine("Rows");
+                Console.WriteLine("---------------");
 
                 while (DataReader.Read())
                 {
-                    for (int index = 0; index < DataReader.FieldCount; index++)
+                    for (int i = 0; i < DataReader.FieldCount; i++)
                     {
-                        Console.WriteLine(DataReader[index].ToString());
+                        Console.WriteLine(DataReader[i].ToString());
                     }
-                    Console.WriteLine("-");
+                    Console.WriteLine("---");
                 }
             }
-
             DataReader.Close();
             MyDataSource.Close();
-
-            Console.WriteLine("Success - GetPrograms");
+            Console.WriteLine("Success - GetStudentsByProgram");
         }
         static void Main(string[] args)
         {
             //AddProgram();
             //GetProgram();
-            //GetPrograms();
+            //AddStudent();
+            //UpdateStudent();
+            //DeleteStudent();
+            GetStudentsByProgram();
+
         }
     }
 }
